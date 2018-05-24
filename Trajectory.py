@@ -130,8 +130,8 @@ while (t < duration) and (projectile.vertPos >= 0):
     #        )
     t += deltat
     if (t < duration) and (projectile.vertPos >= 0):
-        print("t=%.5f" % t)
-        print("     y=%.9f y'=%.9f y''=%.9f" % 
+        print("t = %.5f" % t)
+        print("     y = %.9f y' = %.9f y'' = %.9f" % 
               (projectile.vertPos, projectile.vertVel, projectile.vertAcc))
-        print("     x=%.9f x'=%.9f x''=%.9f" % 
+        print("     x = %.9f x' = %.9f x'' = %.9f" % 
               (projectile.horzPos, projectile.horzVel, projectile.horzAcc))
