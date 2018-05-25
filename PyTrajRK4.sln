@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PyTrajRK4", "PyTrajRK4.pyproj", "{1619EEF1-95AD-4990-8B9C-D2599919E99A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1619EEF1-95AD-4990-8B9C-D2599919E99A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1619EEF1-95AD-4990-8B9C-D2599919E99A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1345BA9-D1DF-4519-9F95-670FC11FD906}
+	EndGlobalSection
+EndGlobal
