@@ -1,17 +1,17 @@
 import math
 
-g = -9.80665    # gravitational constant at earth surface m/s/s
+G = -9.80665    # gravitational constant at earth surface m/s/s
 re = 6371000.0  # mean radius of earth in m
 
 
 class Projectile:
-    vertPos = 0
-    vertVel = 0
-    vertAcc = 0
+    verticalPosition = 0
+    verticalVelocity = 0
+    verticalAcceleration = 0
 
-    horzPos = 0
-    horzVel = 0
-    horzAcc = 0
+    horizontalPosition = 0
+    horizontalVelocity = 0
+    horizontalAcceleration = 0
 
 
 def rk4(state, dt):
@@ -28,49 +28,49 @@ def rk4(state, dt):
         :param state: Projectile (object)"""
 
     # kp1y = projectile.vertPos
-    kv1y = state.vertVel
-    ka1y = state.vertAcc
+    kv1y = state.verticalVelocity
+    ka1y = state.verticalAcceleration
 
-    kp2y = state.vertPos + 0.5 * kv1y * dt
-    kv2y = state.vertVel + 0.5 * ka1y * dt
-    ka2y = yaccel(kp2y)
+    kp2y = state.verticalPosition + 0.5 * kv1y * dt
+    kv2y = state.verticalVelocity + 0.5 * ka1y * dt
+    ka2y = yAcceleration(kp2y)
 
-    kp3y = state.vertPos + 0.5 * kv2y * dt
-    kv3y = state.vertVel + 0.5 * ka2y * dt
-    ka3y = yaccel(kp3y)
+    kp3y = state.verticalPosition + 0.5 * kv2y * dt
+    kv3y = state.verticalVelocity + 0.5 * ka2y * dt
+    ka3y = yAcceleration(kp3y)
 
-    kp4y = state.vertPos + kv3y * dt
-    kv4y = state.vertVel + ka3y * dt
-    ka4y = yaccel(kp4y)
+    kp4y = state.verticalPosition + kv3y * dt
+    kv4y = state.verticalVelocity + ka3y * dt
+    ka4y = yAcceleration(kp4y)
 
     # kp1x = xpos
-    kv1x = state.horzVel
-    ka1x = state.horzAcc
+    kv1x = state.horizontalVelocity
+    ka1x = state.horizontalAcceleration
 
     # kp2x = xpos + 1/2 * kv1x * dt
-    kv2x = state.horzVel + 0.5 * ka1x * dt
-    ka2x = xaccel()
+    kv2x = state.horizontalVelocity + 0.5 * ka1x * dt
+    ka2x = xAcceleration()
 
     # kp3x = xpos + 1/2 * kv2x * dt
-    kv3x = state.horzVel + 0.5 * ka2x * dt
-    ka3x = xaccel()
+    kv3x = state.horizontalVelocity + 0.5 * ka2x * dt
+    ka3x = xAcceleration()
 
     # kp4x = xpos + kv3x * dt
-    kv4x = state.horzVel + ka3x * dt
-    ka4x = xaccel()
+    kv4x = state.horizontalVelocity + ka3x * dt
+    ka4x = xAcceleration()
 
-    state.vertPos += (dt / 6) * (kv1y + 2 * (kv2y + kv3y) + kv4y)
-    state.vertVel += (dt / 6) * (ka1y + 2 * (ka2y + ka3y) + ka4y)
-    state.vertAcc = yaccel(state.vertPos)
+    state.verticalPosition += (dt / 6) * (kv1y + 2 * (kv2y + kv3y) + kv4y)
+    state.verticalVelocity += (dt / 6) * (ka1y + 2 * (ka2y + ka3y) + ka4y)
+    state.verticalAcceleration = yAcceleration(state.verticalPosition)
 
-    state.horzPos += (dt / 6) * (kv1x + 2 * (kv2x + kv3x) + kv4x)
-    state.horzVel += (dt / 6) * (ka1x + 2 * (ka2x + ka3x) + ka4x)
-    state.horzAcc = xaccel()
+    state.horizontalPosition += (dt / 6) * (kv1x + 2 * (kv2x + kv3x) + kv4x)
+    state.horizontalVelocity += (dt / 6) * (ka1x + 2 * (ka2x + ka3x) + ka4x)
+    state.horizontalAcceleration = xAcceleration()
 
     return state
 
 
-def yaccel(h):
+def yAcceleration(h):
     """Determines acceleration from current position,
         velocity, and timestep. This particular acceleration
         function models a spring.
@@ -79,10 +79,10 @@ def yaccel(h):
     #  stiffness = 1
     #  damping = -0.005
     #  return -stiffness*x - damping*v
-    return g * (re / (re + h)) * (re / (re + h))
+    return G * (re / (re + h)) * (re / (re + h))
 
 
-def xaccel():
+def xAcceleration():
     """Determines acceleration from current position,
         velocity, and timestep. This particular acceleration
         function models a spring."""
@@ -99,39 +99,39 @@ while (theta < 0 or theta > 90):
 
 theta *= math.pi / 180
 
-v0 = float(input("Enter initial velocity (m/s): \n"))
-while (v0 < 0):
-    v0 = float(input("ERROR\nEnter a non negative initial velocity (m/s): \n"))
+initialVelocity = float(input("Enter initial velocity (m/s): \n"))
+while (initialVelocity < 0):
+    initialVelocity = float(input("ERROR\nEnter a non negative initial velocity (m/s): \n"))
     
-deltat = float(input("Enter the time step (s) per integration: \n"))
-while (deltat < 0):
-    deltat = float(input("ERROR\nEnter a non negative time step (s) per integration: \n"))
+deltaTime = float(input("Enter the time step (s) per integration: \n"))
+while (deltaTime < 0):
+    deltaTime = float(input("ERROR\nEnter a non negative time step (s) per integration: \n"))
 
 duration = float(input("Enter final time (s): \n"))
 while (duration < 0):
     duration = float(input("ERROR\n Enter a non negative final time (s): \n"))
     
 projectile = Projectile
-projectile.vertPos = height
-projectile.vertVel = v0 * math.sin(theta)
-projectile.vertAcc = yaccel(projectile.vertPos)
-projectile.horzPos = 0
-projectile.horzVel = v0 * math.cos(theta)
-projectile.horzAcc = xaccel()
+projectile.verticalPosition = height
+projectile.verticalVelocity = initialVelocity * math.sin(theta)
+projectile.verticalAcceleration = yAcceleration(projectile.verticalPosition)
+projectile.horizontalPosition = 0
+projectile.horizontalVelocity = initialVelocity * math.cos(theta)
+projectile.horizontalAcceleration = xAcceleration()
 
-t = 0
+currentTimeElapsed = 0
 
-while (t < duration) and (projectile.vertPos >= 0):
-    projectile = rk4(projectile, deltat)
+while (currentTimeElapsed <= duration) and (projectile.verticalPosition >= 0):
+    projectile = rk4(projectile, deltaTime)
     #  Integrate using Euler's method
     #  euler = (
     #        euler[0] + euler[1]*dt,
     #        euler[1] + accel(euler[0],euler[1],dt)*dt
     #        )
-    t += deltat
-    if (t < duration) and (projectile.vertPos >= 0):
-        print("t = %.5f" % t)
-        print("     y = %.9f y' = %.9f y'' = %.9f" % 
-              (projectile.vertPos, projectile.vertVel, projectile.vertAcc))
-        print("     x = %.9f x' = %.9f x'' = %.9f" % 
-              (projectile.horzPos, projectile.horzVel, projectile.horzAcc))
+    currentTimeElapsed += deltaTime
+    #if (currentTimeElapsed <= duration) and (projectile.verticalPosition >= 0):
+    print("t = %.5f" % currentTimeElapsed)
+    print("     y = %.9f y' = %.9f y'' = %.9f" % 
+              (projectile.verticalPosition, projectile.verticalVelocity, projectile.verticalAcceleration))
+    print("     x = %.9f x' = %.9f x'' = %.9f" % 
+              (projectile.horizontalPosition, projectile.horizontalVelocity, projectile.horizontalAcceleration))
